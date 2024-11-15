@@ -1,0 +1,1 @@
+export const gemini_api_key: string | undefined = process.env.GEMINI_API_KEY
