@@ -4,7 +4,7 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "start": "node ."
+    "start": "node --env-file=.env dist/main.js"
   },
   "keywords": [],
   "author": "",
