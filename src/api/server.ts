@@ -1,35 +1,45 @@
-import GeminiAPIService from "@services/gemini-api-service";
-import fastify, { FastifyListenOptions } from "fastify";
+import fastify, { FastifySchema } from "fastify";
 
-const app = fastify()
-const port = parseInt(process.env.SERVER_PORT) ?? 3000
+type Route = {
+    method: string
+    path: string
+    handler: any
+    schema?: FastifySchema
+}
 
-export default class Server {
-    private gemini_api_service = new GeminiAPIService()
-
-    constructor() {
-        this.init()
-    }
-
-    init (onListen?: () => void) {
-        app.listen({
-            port
-        }).then(() => {
-            console.log(`Server listening on port ${port}`)
-            onListen()
-        })
-
-        app.get('/ai?prompt=:prompt', {
-            logLevel: 'warn'
-        }, async (request, reply) => {
-            const prompt = request.query
-
-            console.log(prompt)
-
-            reply.status(200).send({
-                prompt
-            })
-            
+const defaultRoute = {
+    method: "GET",
+    path: "/",
+    handler: async (req: any, res: any) => {
+        res.status(200).send({
+            message: "Hello World"
         })
     }
 }
+
+export default class Server {
+    private port = 3000
+    private app = fastify()
+    
+    private routes: Route[] = [defaultRoute]
+    
+    addRoute(route: Route): this {
+        this.routes.push(route)
+
+        return this
+    }
+
+    init() {
+        for (const route of this.routes) {
+            console.log(`Adding route ${route.method} ${route.path}`)
+            this.app.route({
+                method: route.method,
+                url: route.path,
+                handler: route.handler,
+                schema: route.schema
+            })
+        }
+        this.app.listen({port: this.port}).then(() => console.log(`Server running on port ${this.port}`))
+    }
+}
+

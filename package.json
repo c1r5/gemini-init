@@ -1,10 +1,9 @@
 {
   "name": "gemini-init",
   "version": "1.0.0",
-  "main": "src/main.ts",
+  "main": "dist/main.js",
   "scripts": {
-    "build": "tsc && tsc-alias",
-    "dev": "ts-node src/main.ts"
+    "dev": "rm -rf dist && tsc"
   },
   "keywords": [],
   "author": "",
@@ -12,15 +11,14 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.9.0",
+    "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",
     "typescript": "^5.6.3"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
-    "@types/he": "^1.2.3",
     "fastify": "^5.1.0",
-    "he": "^1.2.0",
     "marked": "^15.0.0"
   }
 }

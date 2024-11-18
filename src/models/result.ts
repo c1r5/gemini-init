@@ -16,16 +16,20 @@ export default class Result <R, E> {
         console.error(this.error)
     }
 
-    onSuccess(callback: (success: R) => void) {
+    onSuccess(callback: (success: R) => void): this {
         if (this.success) {
             callback(this.success)
         }
+
+        return this
     }
 
-    onError(callback: (error: E) => void) {
+    onError(callback: (error: E) => void): this {
         if (this.error) {
             callback(this.error)
         }
+
+        return this
     }
 
 }
