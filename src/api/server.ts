@@ -18,7 +18,8 @@ const defaultRoute = {
 }
 
 export default class Server {
-    private port = 3000
+    private port = parseInt(process.env.PORT) || 3000
+    
     private app = fastify()
     
     private routes: Route[] = [defaultRoute]
