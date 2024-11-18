@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "scripts": {
-    "dev": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc",
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
