@@ -135,7 +135,7 @@ export default class AIRoute {
         }
 
         const generated_prompt = generate_base_prompt(promptSetup)
-        console.log(generated_prompt)
+     
         const ai_result = await geminiApiService.run(generated_prompt)
 
         ai_result.onSuccess(generated_answer => {
